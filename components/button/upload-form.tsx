@@ -35,7 +35,7 @@ const UploadForm = ({style, title}: UploadFormProps): JSX.Element => {
       await handleFileChange(syntheticEvent);
     }
   };
-  const { getRootProps, getInputProps, isDragActive, fileRejections } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     onDropRejected: (fileRejections) => {
       if (fileRejections.some(rejection => rejection.errors.some(error => error.code === 'too-many-files'))) {
