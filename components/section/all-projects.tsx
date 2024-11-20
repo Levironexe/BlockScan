@@ -106,7 +106,7 @@ const AllProjects = () => {
     };
 
     fetchProjects();
-  }, []);
+  }, [supabase]);
 
   useEffect(() => {
     const filtered = projects.filter(project =>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { CustomButton, ResultBody, NoContractFound } from '@/components/index';
+import { ResultBody, NoContractFound } from '@/components/index';
 import { createClient } from '@supabase/supabase-js';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 // Types and Interfaces
 interface AnalysisMetrics {
@@ -88,13 +88,7 @@ const calculateSafetyScore = (metrics: AnalysisMetrics): number => {
     informational: 0.2,
     optimization: 0.1
   };
-  const addUp = {
-    high: 6,
-    medium: 3,
-    low: 1.5,
-    informational: 0.3,
-    optimization: 0.2
-  };
+
   const totalIssues = metrics.high_issues + metrics.medium_issues + 
   metrics.low_issues + metrics.informational_issues + 
   metrics.optimization_issues;
@@ -158,7 +152,6 @@ const ContractScanResult: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [rawMarkdownContent, setRawMarkdownContent] = useState('');
-  const router = useRouter();
 
   useEffect(() => {
     const fetchResults = async () => {
