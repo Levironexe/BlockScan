@@ -443,7 +443,6 @@ async function setupApplication() {
       
               // Execute Slither analysis with new implementation
               const analysisResult = await executeSlitherAnalysis(filePath);
-              
               // Parse results
               const scanDuration = timer.stop();
               const metrics = parseSlitherOutput(analysisResult.overview, scanDuration);
@@ -539,45 +538,7 @@ async function setupApplication() {
           }
       });
 
-      app.get('/contract/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        
-        // Check if ID is malformed (contains Object or %20)
-        if (id.includes('Object') || id.includes('%20')) {
-            const cleanId = id.replace(/Object|%20/g, '');
-            return res.redirect(301, `/contract/${cleanId}`);
-        }
 
-        // Get data from Supabase
-        const { data, error } = await supabase
-            .from('slither_metrics')
-            .select('*')
-            .eq('id', id)
-            .single();
-
-        if (error) throw error;
-
-        if (!data) {
-            return res.status(404).json({
-                status: 'error',
-                message: 'Contract not found'
-            });
-        }
-
-        res.json({
-            status: 'success',
-            data
-        });
-
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({
-            status: 'error',
-            message: error.message
-        });
-    }
-});
 
         // Start server
         const PORT = process.env.PORT || 5000;

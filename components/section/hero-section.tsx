@@ -23,7 +23,7 @@ const Hero = () => {
 
 
     return (
-        <main className='max-w-full bg-gradient-to-bl from-black via-black/90 to-black/70 px-16'>
+        <main className='max-w-full bg-gradient-to-bl from-black via-black/90 to-black/70 px-16 pt-16 sm:pt-0'>
             <div className="flex flex-col xl:flex-row  min-h-screen items-center max-w-screen-2xl mx-auto">
                 <ParticlesComponent id='particles'/>
                 {/* Text content */}
@@ -98,27 +98,30 @@ const Hero = () => {
                 </div>
             </div>
 
+            
             <div className='h-[600px]'>
-                <div className='max-w-screen-2xl mx-auto flex  white justify-between pt-[150px]'>
-                    <div>
-                        <img src='/images/experts_recommendation.svg' alt='Swinburn audit experts'/>
-                        <p className='text-center text-[18px] font-semibold mt-2'>Swinburne Audit Experts</p>
-                    </div>
-                    <div>
-                    <img src='/images/seamless_integration.svg' alt='Swinburn audit experts'/>
-                    <p className='text-center text-[18px] font-semibold mt-2'>Seamless Integration</p>
-                    </div>
-                    <div>
-                    <img src='/images/slither_detectors.svg' alt='Swinburn audit experts'/>
-                    <p className='text-center text-[18px] font-semibold mt-2'>93+ Slither Detectors</p>
-                    </div>
-                    <div>
-                    <img src='/images/audit_report.svg' alt='Swinburn audit experts'/>
-                    <p className='text-center text-[18px] font-semibold mt-2'>Generate Audit Reports</p>
-                    </div>
- 
-                </div>
-            </div>        
+    <div className='max-w-screen-2xl mx-auto grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-4 gap-4 pt-[150px]'>
+        <div className='flex flex-col items-center'>
+        <img src='/images/experts_recommendation.svg' alt='Swinburn audit experts'/>
+            <p className='text-center text-[18px] font-semibold mt-2 text-white'>Swinburne Audit Experts</p>
+        </div>
+        <div className='flex flex-col items-center'>
+            <img src='/images/seamless_integration.svg' alt='Seamless Integration'/>
+            <p className='text-center text-[18px] font-semibold mt-2 text-white'>Seamless Integration</p>
+        </div>
+        <div className='flex flex-col items-center'>
+            <img src='/images/slither_detectors.svg' alt='93+ Slither Detectors'/>
+            <p className='text-center text-[18px] font-semibold mt-2 text-white'>93+ Slither Detectors</p>
+        </div>
+        <div className='flex flex-col items-center'>
+            <img src='/images/audit_report.svg' alt='Generate Audit Reports'/>
+            <p className='text-center text-[18px] font-semibold mt-2 text-white'>Generate Audit Reports</p>
+        </div>
+    </div>
+</div>
+
+
+        
         </main>
     );
 };

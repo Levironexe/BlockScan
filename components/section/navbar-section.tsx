@@ -9,6 +9,9 @@ const Navbar = () => {
 
   const handleScroll = () => {
     setIsScrolled(window.scrollY > 10);
+    if (isMenuOpen) {
+      setIsMenuOpen(false); // Đóng menu khi cuộn lên
+    }
   };
 
   useEffect(() => {
@@ -16,7 +19,7 @@ const Navbar = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isMenuOpen]); // Thêm isMenuOpen vào dependency array để cập nhật khi menu mở/đóng
 
   return (
     <div className={`
@@ -67,36 +70,36 @@ const Navbar = () => {
           </div>
 
           <button
-            className="sm:hidden text-white"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor" 
-              className="w-6 h-6"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M4 6h16M4 12h16m-7 6h7" 
-              />
-            </svg>
-          </button>
+        className="sm:hidden text-white absolute right-0 top-1/2 transform -translate-y-1/2 mr-4"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor" 
+          className="w-6 h-6"
+        >
+          <path 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth={2} 
+            d="M4 6h16M4 12h16m-7 6h7" 
+          />
+        </svg>
+      </button>
         </div>
-
+        
         {isMenuOpen && (
-          <div className="sm:hidden mt-4 pb-4 bg-[rgba(5,4,4,0.9)] rounded-lg p-4">
-            <div className="flex flex-col gap-4">
-              <a href='/projects' className='text-white hover:text-primary-red transition-colors'>
+          <div className="sm:hidden bg-[rgba(5,4,4,0.9)] p-4 w-full text-center absolute top-full left-0 z-50">
+            <div className="flex flex-col gap-4 w-full">
+              <a href='/projects' className='text-white hover:text-primary-red transition-colors w-full'>
                 PROJECTS
               </a>
               <a 
                 href='https://docs.google.com/forms/d/e/1FAIpQLSd4P-PJ7yR1Eol75cZW3-9d8JtTOwqQv6hDm6cmoNg90LUHrA/viewform?usp=sf_link' 
                 target='_blank'
-                className='text-white hover:text-primary-red transition-colors'
+                className='text-white hover:text-primary-red transition-colors w-full'
               >
                 CONTACT SUPPORT
               </a>

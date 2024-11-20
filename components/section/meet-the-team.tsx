@@ -15,7 +15,7 @@ const MeetTheTeam = () => {
     </div>
     <section className="max-w-screen-2xl mx-auto py-20 first-line:flex flex-col smp:flex-row gap-12  z-50" >
         <motion.div 
-        className="flex gap-20 justify-center items-start xl:mb-0"
+        className="flex flex-col gap-10 justify-center items-center xl:items-start xl:flex-row xl:gap-20 xl:mb-0"
         initial='hidden'
         whileInView='reveal'
         transition={{ staggerChildren: 0.2 }}>

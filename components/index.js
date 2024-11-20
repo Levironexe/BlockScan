@@ -28,6 +28,7 @@ import MeetTheTeam from './section/meet-the-team';
 import OurContributors from './section/on-scroll-components/our-contributors';
 import PagesExample from './section/on-scroll-components/pages-example';
 import { Meteors } from './utils/meteors';
+import {SessionProvider} from './utils/session_provider'
 
 export {
     Hero,
@@ -56,5 +57,6 @@ export {
     OurContributors,
     MeetTheTeam,
     PagesExample,
+    SessionProvider,
     Meteors,
 }

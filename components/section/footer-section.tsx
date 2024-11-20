@@ -9,7 +9,7 @@ export default function Footer() {
       {/*Meteors*/}
       <Meteors number={25} className="z-0 opacity-25" />
       <div className="py-16 max-w-screen-2xl mx-auto">
-        <div className="flex justify-between items-start gap-12">
+      <div className="flex flex-col md:flex-row justify-between items-center text-center md:items-start md:text-left gap-12">
           <div className="flex flex-col gap-6">
             <Link href="/">
               <div className="flex items-center">
@@ -34,7 +34,7 @@ export default function Footer() {
                 </div>
               </div>
             </Link>
-            <div className="flex justify-start space-x-4">
+            <div className="flex justify-center md:justify-start space-x-4">
               {/* GitHub Link */}
               <button className="border-[2px] border-gray-300 rounded-full p-2 hover:text-primary-red hover:border-primary-red/50 hover:scale-105 transition-all duration-300">
                 <a href="https://github.com/Levironexe" target="_blank" rel="noopener noreferrer">

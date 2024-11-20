@@ -163,7 +163,6 @@ const ContractScanResult: React.FC = () => {
   useEffect(() => {
     const fetchResults = async () => {
      const sessionId = localStorage.getItem('sessionId');
-
       try {
         setLoading(true);
 
