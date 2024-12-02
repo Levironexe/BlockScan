@@ -23,7 +23,8 @@ const UploadForm = ({style, title}: UploadFormProps): JSX.Element => {
   const [messageName, setMessageName] = useState<string>('');  
   const {isScanning, startScanning, setIsScanning} = useScanning(); // Destructuring scanning state and key press handler from custom hook
   const [openUpload, setOpenUpload] = useState(false);
-  const API_URL = process.env.NEXT_PUBLIC_SLITHER_SERVICE_URL ?? 'http://localhost:5000';
+  const API_URL = process.env.NEXT_PUBLIC_SLITHER_SERVICE_URL;
+  console.log(API_URL);
   const onDrop = async (acceptedFiles: File[]) => {
     if (acceptedFiles.length === 1) {
       const syntheticEvent = {
