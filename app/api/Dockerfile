@@ -9,12 +9,18 @@ RUN apt-get update && apt-get install -y \
     git \
     software-properties-common
 
-# Install Solc and Slither
-RUN pip3 install --upgrade pip && \
-    pip3 install solc-select && \
-    solc-select install 0.8.19 && \
-    solc-select use 0.8.19 && \
-    pip3 install slither-analyzer
+# Set Python environment variables
+ENV PATH="/root/.local/bin:${PATH}"
+ENV PYTHONPATH="/root/.local/lib/python3/site-packages:${PYTHONPATH}"
+
+# Install Python packages separately to better track errors
+RUN python3 -m pip install --user --upgrade pip
+RUN python3 -m pip install --user solc-select
+RUN python3 -m pip install --user slither-analyzer
+
+# Install and set Solidity version
+RUN solc-select install 0.8.19
+RUN solc-select use 0.8.19
 
 # Create app directory
 WORKDIR /app
