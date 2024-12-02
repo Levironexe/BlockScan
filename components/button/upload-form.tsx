@@ -23,7 +23,7 @@ const UploadForm = ({style, title}: UploadFormProps): JSX.Element => {
   const [messageName, setMessageName] = useState<string>('');  
   const {isScanning, startScanning, setIsScanning} = useScanning(); // Destructuring scanning state and key press handler from custom hook
   const [openUpload, setOpenUpload] = useState(false);
-  const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5000';
+  const API_URL = process.env.NEXT_PUBLIC_SLITHER_SERVICE_URL ?? 'http://localhost:5000';
   const onDrop = async (acceptedFiles: File[]) => {
     if (acceptedFiles.length === 1) {
       const syntheticEvent = {
@@ -168,31 +168,28 @@ const UploadForm = ({style, title}: UploadFormProps): JSX.Element => {
     }
   };
 
-
   return (
     <div>
-      <CustomButton
-        handleClick={handleUploadButton}
-        style={`${style}`}
-        title={title}
-      />
+      <CustomButton handleClick={handleUploadButton} style={`${style}`} title={title} />
 
       {openUpload && (
-        <div className="z-40 fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4"
-       
-        >
-        <motion.div  
-        initial="hidden" 
-        animate="reveal"
-        transition={{duration: 0.2, ease: 'easeInOut'}}
-        variants={fadeUp}>
-          <div className="bg-white rounded-xl shadow-lg max-w-7xl w-full duration-300 ease-in-out">
-              <div className="flex justify-between items-center p-6">
-                <h2 className="text-2xl font-semibold">Upload Contract</h2>
-                <button onClick={closeUploadButton}>
-                  <X className="h-6 w-6" />
-                </button>
-              </div>
+        <>
+          {/* Modal gốc cho desktop */}
+          <div className="hidden sm:flex z-40 fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4">
+            <motion.div
+              initial="hidden"
+              animate="reveal"
+              transition={{ duration: 0.2, ease: 'easeInOut' }}
+              variants={fadeUp}
+            >
+              <div className="bg-white rounded-xl shadow-lg max-w-7xl w-full duration-300 ease-in-out">
+                {/* Nội dung modal gốc */}
+                <div className="flex justify-between items-center p-6">
+                  <h2 className="text-2xl font-semibold">Upload Contract</h2>
+                  <button onClick={closeUploadButton}>
+                    <X className="h-6 w-6" />
+                  </button>
+                </div>
 
               <div className="flex">
                 <div className="p-6 rounded-xl flex-[3]">
@@ -338,11 +335,32 @@ const UploadForm = ({style, title}: UploadFormProps): JSX.Element => {
             </div>
           </motion.div>
         </div>
-      )}
-      {isScanning && <ScanningNotification/>}
 
+      {/* Modal thay thế cho mobile */}
+      <div className="sm:hidden flex z-40 fixed inset-0 bg-black bg-opacity-50 items-center justify-center p-4">
+        <motion.div  
+          initial="hidden" 
+          animate="reveal"
+          transition={{duration: 0.2, ease: 'easeInOut'}}
+          variants={fadeUp}>
+          <div className="bg-white rounded-xl shadow-lg max-w-md w-full duration-300 ease-in-out p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold">Notice</h2>
+              <button onClick={closeUploadButton}>
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <p className="text-gray-600 text-center">
+              This feature is only available on desktop browsers. Please switch to a desktop browser to use the upload and scan functionality.
+            </p>
+          </div>
+        </motion.div>
+        </div>
+        </>
+      )}
+
+      {isScanning && <ScanningNotification />}
     </div>
-    
   );
 };
 

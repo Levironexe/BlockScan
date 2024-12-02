@@ -15,7 +15,7 @@ const SmartScanning = () => {
         <div>
           {/*Section title*/}
           <h1 className='text-white text-3xl sm:text-4xl lg:text-6xl mt-4 lg:mt-8 font-bold text-shadow-weak-ass-glow' style={{ filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.5))' }}>
-            Smart scanning
+            Smart scanner
           </h1>
           <div className='flex flex-col sm:flex-row sm:flex-wrap justify-between items-end gap-2 sm:gap-4 text-subtitle__gray font-bold text-sm sm:text-base'>
             <div className='flex items-center'>
