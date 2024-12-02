@@ -1,41 +1,25 @@
-# Base image: Use the official Python image
-FROM python:3.9-slim
+FROM node:18
 
-# Install Node.js and other dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
-    nodejs \
-    npm \
-    git \
-    curl \
-    software-properties-common \
-    && apt-get clean
+    python3 \
+    python3-pip \
+    python3-setuptools \
+    python3-dev \
+    software-properties-common
 
-# Install Solidity compiler and solc-select
-RUN add-apt-repository ppa:ethereum/ethereum \
-    && apt-get update \
-    && apt-get install -y solc
+# Install Python packages with the break-system-packages flag
+RUN python3 -m pip install --break-system-packages solc-select slither-analyzer
 
-RUN pip install --no-cache-dir solc-select \
-    && solc-select install 0.8.19 \
-    && solc-select use 0.8.19
-
-# Install Slither via pip
-RUN pip install --no-cache-dir slither-analyzer
-
-# Set the working directory
+# Create app directory
 WORKDIR /app/api
 
-# Copy package.json and package-lock.json to install Node.js dependencies
-COPY app/api/package*.json ./
-
-# Install Node.js dependencies
+# Install app dependencies
+COPY package*.json ./
 RUN npm install
 
-# Copy the rest of the application code
-COPY app/api ./
+# Bundle app source
+COPY . .
 
-# Expose the backend port (adjust if necessary)
-EXPOSE 3000
-
-# Default command to start the app
+# Start command
 CMD ["node", "backend.mjs"]
