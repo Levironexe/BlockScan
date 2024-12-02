@@ -18,6 +18,7 @@ const UploadForm = ({style, title}: UploadFormProps): JSX.Element => {
     reveal: {opacity: 1, scale: 1},
   } 
   const [projectName, setProjectName] = useState<string>(''); // Track project name input
+  const [version, setVersion] = useState<string>('');
   const [contractFile, setContractFile] = useState<File | null>(null);
   const [message, setMessage] = useState<string>('');  
   const [messageName, setMessageName] = useState<string>('');  
@@ -130,7 +131,7 @@ const UploadForm = ({style, title}: UploadFormProps): JSX.Element => {
       const analyzeResponse = await axios.post(`${API_URL}/contract-analyze`, {
         projectName,
         filename: uploadResponse.data.data.filename,
-        
+        version,
       }, {
         headers: {
           'Content-Type': 'application/json',
@@ -293,6 +294,36 @@ const UploadForm = ({style, title}: UploadFormProps): JSX.Element => {
                     )}
                   </div>
                   <form onSubmit={handleSubmit} encType="multipart/form-data">
+                  <form className='mb-4'>
+                    <label>Solidity Version: </label>
+                    <select value={version} onChange={(e) => setVersion(e.target.value)}>
+                    <option value="0.8.1">0.8.1</option>
+                      <option value="0.8.2">0.8.2</option>
+                      <option value="0.8.19">0.8.19</option>
+                      <option value="0.8.20">0.8.20</option>
+                      <option value="0.8.3">0.8.3</option>
+                      <option value="0.8.4">0.8.4</option>
+                      <option value="0.8.5">0.8.5</option>
+                      <option value="0.8.6">0.8.6</option>
+                      <option value="0.8.7">0.8.7</option>
+                      <option value="0.8.8">0.8.8</option>
+                      <option value="0.8.9">0.8.9</option>
+                      <option value="0.8.10">0.8.10</option>
+                      <option value="0.8.11">0.8.11</option>
+                      <option value="0.8.12">0.8.12</option>
+                      <option value="0.8.13">0.8.13</option>
+                      <option value="0.8.14">0.8.14</option>
+                      <option value="0.8.15">0.8.15</option>
+                      <option value="0.8.16">0.8.16</option>
+                      <option value="0.8.17">0.8.17</option>
+                      <option value="0.8.18">0.8.18</option>
+                      <option value="0.8.21">0.8.21</option>
+                      <option value="0.8.22">0.8.22</option>
+                      <option value="0.8.23">0.8.23</option>
+                      <option value="0.8.24">0.8.24</option>
+                      <option value="0.8.25">0.8.25</option>
+                    </select>
+                  </form>
 
                   <button
                       type="submit"
