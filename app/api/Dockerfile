@@ -9,18 +9,13 @@ RUN apt-get update && apt-get install -y \
     git \
     software-properties-common
 
-# Set Python environment variables
-ENV PATH="/root/.local/bin:${PATH}"
-ENV PYTHONPATH="/root/.local/lib/python3/site-packages:${PYTHONPATH}"
-
-# Install Python packages separately to better track errors
-RUN python3 -m pip install --user --upgrade pip
-RUN python3 -m pip install --user solc-select
-RUN python3 -m pip install --user slither-analyzer
+# Install Python packages globally
+RUN python3 -m pip install --no-cache-dir pip --upgrade
+RUN python3 -m pip install --no-cache-dir solc-select
+RUN python3 -m pip install --no-cache-dir slither-analyzer
 
 # Install and set Solidity version
-RUN solc-select install 0.8.19
-RUN solc-select use 0.8.19
+RUN solc-select install 0.8.19 && solc-select use 0.8.19
 
 # Create app directory
 WORKDIR /app
@@ -31,9 +26,6 @@ RUN npm install
 
 # Bundle app source
 COPY . .
-
-# Expose port
-EXPOSE 5000
 
 # Start command
 CMD ["node", "backend.mjs"]
