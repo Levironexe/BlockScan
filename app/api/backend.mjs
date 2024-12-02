@@ -421,7 +421,7 @@ async function setupApplication() {
           let filePath;
       
           try {
-              const { projectName, filename, version } = req.body;
+              const { projectName, filename } = req.body;
               console.log('Analyzing:', { projectName, filename });
               if (!projectName || !filename) {
                   return res.status(400).json({
@@ -429,17 +429,6 @@ async function setupApplication() {
                       message: 'Project name and filename are required'
                   });
               }
-              console.log(`Running: '(solc-select use ${version})'`);
-
-              const { stdout, stderr } = await execAsync(`solc-select use ${version}`);
-                if (stderr) {
-                    console.error('Error while selecting Solidity version:', stderr);
-                    return res.status(500).json({
-                        status: 'error',
-                        message: `Error selecting Solidity version: ${stderr}`
-                    });
-                }
-                console.log('Solidity version selected:', stdout);
               filePath = path.join(UPLOADS_DIR, filename);
               
               try {
