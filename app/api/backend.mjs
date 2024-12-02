@@ -65,7 +65,7 @@ function initializeExpress() {
 
     // CORS configuration
     const corsOptions = {
-        origin: ['http://localhost:3000', 'http://localhost:3001', 'https://blockscan-swin.vercel.app'],
+        origin: ['http://localhost:3000', 'http://localhost:3001', 'https://blockscan-swin.vercel.app', 'https://blockscan-ndr4.onrender.com'],
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         credentials: true
     };
