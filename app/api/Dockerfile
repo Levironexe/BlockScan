@@ -7,15 +7,17 @@ RUN apt-get update && apt-get install -y \
     npm \
     git \
     curl \
+    software-properties-common \
     && apt-get clean
 
 # Install Solidity compiler and solc-select
-RUN apt-get update && apt-get install -y \
-    software-properties-common \
-    && add-apt-repository ppa:ethereum/ethereum \
-    && apt-get update && apt-get install -y solc
+RUN add-apt-repository ppa:ethereum/ethereum \
+    && apt-get update \
+    && apt-get install -y solc
 
-RUN pip install --no-cache-dir solc-select && solc-select install 0.8.19 && solc-select use 0.8.19
+RUN pip install --no-cache-dir solc-select \
+    && solc-select install 0.8.19 \
+    && solc-select use 0.8.19
 
 # Install Slither via pip
 RUN pip install --no-cache-dir slither-analyzer
@@ -29,7 +31,7 @@ COPY app/api/package*.json ./
 # Install Node.js dependencies
 RUN npm install
 
-# Copy the rest of the application
+# Copy the rest of the application code
 COPY app/api ./
 
 # Expose the backend port (adjust if necessary)
