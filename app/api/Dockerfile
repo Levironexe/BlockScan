@@ -10,6 +10,8 @@ RUN apt-get update && apt-get install -y \
 
 # Install Python packages with the break-system-packages flag
 RUN python3 -m pip install --break-system-packages solc-select slither-analyzer
+RUN solc-select install 0.8.1
+RUN solc-select use 0.8.1
 
 # Set working directory
 WORKDIR /app
