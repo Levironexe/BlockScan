@@ -14,13 +14,10 @@ RUN python3 -m pip install --break-system-packages solc-select slither-analyzer
 # Set working directory
 WORKDIR /app
 
-# We need to be able to access package.json from the root
-COPY ../../package*.json ./
+# Copy only the necessary dependencies for backend
+RUN npm install express cors multer @supabase/supabase-js dotenv
 
-# Install dependencies
-RUN npm install
-
-# Copy the current directory contents into the container
+# Copy the current directory contents
 COPY . .
 
 # Start command
