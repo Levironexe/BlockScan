@@ -14,14 +14,14 @@ RUN python3 -m pip install --break-system-packages solc-select slither-analyzer
 # Set working directory
 WORKDIR /app
 
-# Copy package files from root first
-COPY ../package*.json ./
+# We need to be able to access package.json from the root
+COPY ../../package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy the api directory content
-COPY . ./api/
+# Copy the current directory contents into the container
+COPY . .
 
-# Start command from the api directory
-CMD ["node", "api/backend.mjs"]
+# Start command
+CMD ["node", "backend.mjs"]
