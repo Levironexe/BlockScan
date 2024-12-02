@@ -1,36 +1,39 @@
-FROM node:18
+# Base image: Use the official Python image
+FROM python:3.9-slim
 
-# Install system dependencies
+# Install Node.js and other dependencies
 RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-setuptools \
-    python3-dev \
+    nodejs \
+    npm \
     git \
-    software-properties-common && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    curl \
+    && apt-get clean
 
-# Install pip using get-pip.py to bypass the PEP 668 restriction
-RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3
+# Install Solidity compiler and solc-select
+RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    && add-apt-repository ppa:ethereum/ethereum \
+    && apt-get update && apt-get install -y solc
 
-# Confirm Python and pip installation
-RUN python3 --version && pip3 --version
+RUN pip install --no-cache-dir solc-select && solc-select install 0.8.19 && solc-select use 0.8.19
 
-# Install Python packages globally
-RUN pip3 install --no-cache-dir solc-select slither-analyzer
+# Install Slither via pip
+RUN pip install --no-cache-dir slither-analyzer
 
-# Install and set Solidity version
-RUN solc-select install 0.8.19 && solc-select use 0.8.19
+# Set the working directory
+WORKDIR /app/api
 
-# Create app directory
-WORKDIR /app
+# Copy package.json and package-lock.json to install Node.js dependencies
+COPY app/api/package*.json ./
 
-# Install app dependencies
-COPY package*.json ./
+# Install Node.js dependencies
 RUN npm install
 
-# Bundle app source
-COPY . .
+# Copy the rest of the application
+COPY app/api ./
 
-# Start command
+# Expose the backend port (adjust if necessary)
+EXPOSE 3000
+
+# Default command to start the app
 CMD ["node", "backend.mjs"]
