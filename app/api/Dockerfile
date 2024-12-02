@@ -6,31 +6,22 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     python3-setuptools \
     python3-dev \
-    git \
     software-properties-common
 
-# Upgrade pip using apt instead
-RUN apt-get install -y python3-pip
+# Install Python packages with the break-system-packages flag
+RUN python3 -m pip install --break-system-packages solc-select slither-analyzer
 
-# Install Python packages
-RUN pip3 install --no-cache-dir solc-select
-RUN pip3 install --no-cache-dir slither-analyzer
-
-# Install and set Solidity version
-RUN solc-select install 0.8.19 && solc-select use 0.8.19
-
-# Create app directory
+# Set working directory
 WORKDIR /app
 
-# Install the latest npm version
-RUN npm install -g npm@latest
+# Copy package files from root first
+COPY ../package*.json ./
 
-# Install app dependencies
-COPY package*.json ./
-RUN npm install --verbose
+# Install dependencies
+RUN npm install
 
-# Bundle app source
-COPY . .
+# Copy the api directory content
+COPY . ./api/
 
-# Start command
-CMD ["node", "backend.mjs"]
+# Start command from the api directory
+CMD ["node", "api/backend.mjs"]
