@@ -22,7 +22,7 @@ const NoContractFound: React.FC<NoContractFoundProps> = ({error}) => {
             <h1 className="my-4 text-3xl font-bold text-gray-900">Project Not Found</h1>
               <div className='mb-8 text-gray-600 rounded-xl border p-4 border-red-200'>
               <p className="text-lg text-left text-primary-red">
-                We couldn't find the project <span className="font-mono text-sm bg-gray-100 p-1 rounded">{truncateText({text: error, maxLength: 20 })}</span>.
+                We couldn&apos;t find the project <span className="font-mono text-sm bg-gray-100 p-1 rounded">{truncateText({text: error, maxLength: 20 })}</span>.
               </p>
               <p className='text-left text-lg text-gray-600 mb-2'>
               This might be because: 
@@ -30,7 +30,7 @@ const NoContractFound: React.FC<NoContractFoundProps> = ({error}) => {
               <ul className="list-disc pl-5 space-y-2 text-left">
                 <li>The project ID is incorrect</li>
                 <li>The project has been deleted</li>
-                <li>You don't have permission to access this project</li>
+                <li>You don&apos;t have permission to access this project</li>
               </ul>
             </div>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
