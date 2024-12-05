@@ -267,7 +267,7 @@ function parseSlitherVulns(slitherVulns) {
             { id: 'unprotected-upgrade', name: 'Unprotected upgradeable contract', severity: 'High', recommendation:'Add a constructor to ensure initialize cannot be called on the logic contract.'},
             { id: 'codex', name: 'Use Codex to find vulnerabilities.', severity: 'High', recommendation:'Review codexs message.' },
             { id: 'arbitrary-send-erc20-permit', name: 'transferFrom uses arbitrary from with permit', severity: 'High', recommendation:'Ensure that the underlying ERC20 token correctly implements a permit function.'},
-            { id: 'arbitrary-send-eth', name: 'Functions that send Ether to arbitrary destinations', severity: 'High', recommendation:'Ensure that an arbitrary user cannot withdraw unauthorized funds.' },
+            { id: 'functions-that-send-ether-to-arbitrary-destinations', name: 'Functions that send Ether to arbitrary destinations', severity: 'High', recommendation:'Ensure that an arbitrary user cannot withdraw unauthorized funds.' },
             { id: 'controlled-array-length', name: 'Array Length Assignment', severity: 'High', recommendation:'Do not allow array lengths to be set directly set; instead, opt to add values as needed. Otherwise, thoroughly review the contract to ensure a user-controlled variable cannot reach an array length assignment.' },
             { id: 'controlled-delegatecall', name: 'Controlled Delegatecall', severity: 'High', recommendation:'Avoid using delegatecall. Use only trusted destinations.'},
             { id: 'delegatecall-loop', name: 'Payable functions using delegatecall inside a loop', severity: 'High', recommendation:'Carefully check that the function called by delegatecall is not payable/doesnt use msg.value.'},
