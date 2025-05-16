@@ -119,15 +119,5 @@ When a contract is uploaded, our backend executes Slither against the Solidity c
 - **Nguyen Thien Phuoc** - Group Leader, Fullstack Developer
 - **Nguyen Phan Quoc Viet** - Frontend Developer, Document Preparer
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🔗 Related Resources
-
-- **[Admin Dashboard](https://github.com/yourusername/blockscan-admin)** - Admin interface for the BlockScan system
-- **[API Documentation](https://github.com/yourusername/blockscan/docs/api.md)** - Comprehensive API documentation
-
----
 
 Made with ❤️ for blockchain security
